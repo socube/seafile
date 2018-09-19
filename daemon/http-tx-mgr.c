@@ -4739,3 +4739,19 @@ http_task_error_str (int task_errno)
 
     return http_task_error_strs[task_errno];
 }
+
+gboolean
+is_http_task_net_error (char *err_detail)
+{
+    if (!err_detail &&
+        (strcmp (err_detail, "Network error") ||
+        strcmp (err_detail, "Cannot resolve proxy address") ||
+        strcmp (err_detail, "Cannot resolve server address") ||
+        strcmp (err_detail, "Cannot connect to server") ||
+        strcmp (err_detail, "Failed to establish secure connection") ||
+        strcmp (err_detail, "Data transfer was interrupted") ||
+        strcmp (err_detail, "Data transfer timed out")))
+        return TRUE;
+    else
+        return FALSE;
+}
